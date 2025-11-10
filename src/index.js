@@ -40,7 +40,7 @@ function checkClash(schedA, schedB) {
 }
 
 // ✅ GET enrollments
-app.get('/enrollments', checkAuth, async (req, res) => {
+app.get('/api/enrollments', checkAuth, async (req, res) => {
     try {
         const { id: requesterId, role: requesterRole } = req.user;
 
@@ -77,7 +77,7 @@ app.get('/enrollments', checkAuth, async (req, res) => {
     }
 });
 
-app.post('/enrollments', checkAuth, async (req, res) => {
+app.post('/api/enrollments', checkAuth, async (req, res) => {
     try {
         const { id: requesterId, role: requesterRole } = req.user;
         const { student_id, course_id } = req.body;
@@ -163,7 +163,7 @@ app.post('/enrollments', checkAuth, async (req, res) => {
 });
 
 // ✅ Test endpoint
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.json({ message: "Enrollment Service API is running!" });
 });
 
