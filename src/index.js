@@ -97,7 +97,7 @@ app.post('/api/enrollments', checkAuth, async (req, res) => {
         let newCourse;
         try {
             const token = req.headers['authorization'];
-            const courseRes = await axios.get(`${COURSE_SERVICE_URL}/api/course/${course_id}`, {
+            const courseRes = await axios.get(`${COURSE_SERVICE_URL}/api/courses/${course_id}`, {
                 headers: { 'Authorization': token, 'Accept': 'application/json' }
             });
 
@@ -125,7 +125,7 @@ app.post('/api/enrollments', checkAuth, async (req, res) => {
             let currentCourseSchedule;
             try {
                 const token = req.headers['authorization'];
-                const courseRes = await axios.get(`${COURSE_SERVICE_URL}/course/${currentCourseId}`, {
+                const courseRes = await axios.get(`${COURSE_SERVICE_URL}/api/courses/${currentCourseId}`, {
                      headers: { 'Authorization': token, 'Accept': 'application/json' }
                 });
                 if (!courseRes.data.schedule) continue;
