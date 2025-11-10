@@ -1,10 +1,10 @@
-import axios from 'axios';
-import dotenv from 'dotenv';
+const axios = require('axios'); 
+const dotenv = require('dotenv');
 dotenv.config();
 
 const AUTH_SERVICE_URL = process.env.API_GATEWAY_URL || 'http://localhost:3000/api';
 
-export const checkAuth = async (req, res, next) => {
+const checkAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -13,7 +13,7 @@ export const checkAuth = async (req, res, next) => {
       return res.status(401).json({ message: "Akses ditolak: Token tidak ada." });
     }
 
-    const authResponse = await axios.get(`${AUTH_SERVICE_URL}/auth/me`, {
+    const authResponse = await axios.get(`${AUTH_SERVICE_URL}/api/auth/me`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -34,4 +34,8 @@ export const checkAuth = async (req, res, next) => {
     console.error("Auth Middleware Error:", error.message);
     res.status(500).json({ message: "Gagal menghubungi service otentikasi." });
   }
+};
+
+module.exports = {
+  checkAuth: checkAuth
 };
