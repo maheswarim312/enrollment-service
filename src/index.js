@@ -97,7 +97,7 @@ app.post('/api/enrollments', checkAuth, async (req, res) => {
         let newCourse;
         try {
             const token = req.headers['authorization'];
-            const courseRes = await axios.get(`${COURSE_SERVICE_URL}/course/${course_id}`, {
+            const courseRes = await axios.get(`${COURSE_SERVICE_URL}/api/course/${course_id}`, {
                 headers: { 'Authorization': token, 'Accept': 'application/json' }
             });
 
